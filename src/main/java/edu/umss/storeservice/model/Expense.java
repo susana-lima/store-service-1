@@ -7,9 +7,12 @@ package edu.umss.storeservice.model;
 import edu.umss.storeservice.dto.ExpenseDto;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
 public class Expense extends ModelBase<ExpenseDto> {
+    @Enumerated(EnumType.STRING)
     private ExpenseType expenseType;
     private Long value;
     private String description;
