@@ -8,10 +8,9 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-public class Category {
+public class Unit {
     private Long id;
-    private String categoryName;
-    private String categoryDescription;
+    private String name;
     private Timestamp createdOn;
     private Timestamp updatedOn;
 
@@ -26,23 +25,13 @@ public class Category {
     }
 
     @Basic
-    @Column(name = "category_name", nullable = false, length = 100)
-    public String getCategoryName() {
-        return categoryName;
+    @Column(name = "name", nullable = false, length = 200)
+    public String getName() {
+        return name;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    @Basic
-    @Column(name = "category_description", nullable = false, length = 2147483647)
-    public String getCategoryDescription() {
-        return categoryDescription;
-    }
-
-    public void setCategoryDescription(String categoryDescription) {
-        this.categoryDescription = categoryDescription;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Basic
@@ -69,17 +58,16 @@ public class Category {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return Objects.equals(id, category.id) &&
-                Objects.equals(categoryName, category.categoryName) &&
-                Objects.equals(categoryDescription, category.categoryDescription) &&
-                Objects.equals(createdOn, category.createdOn) &&
-                Objects.equals(updatedOn, category.updatedOn);
+        Unit unit = (Unit) o;
+        return Objects.equals(id, unit.id) &&
+                Objects.equals(name, unit.name) &&
+                Objects.equals(createdOn, unit.createdOn) &&
+                Objects.equals(updatedOn, unit.updatedOn);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, categoryName, categoryDescription, createdOn, updatedOn);
+        return Objects.hash(id, name, createdOn, updatedOn);
     }
 }
