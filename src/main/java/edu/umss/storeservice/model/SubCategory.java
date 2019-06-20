@@ -1,14 +1,14 @@
 package edu.umss.storeservice.model;
 
 import edu.umss.storeservice.dto.SubCategoryDto;
-
 import javax.persistence.*;
 
 @Entity
 public class SubCategory extends ModelBase<SubCategoryDto> {
     private String subCategoryName;
     private String subCategoryDescription;
-    private Category categoryByCategoryId;
+    @ManyToOne(optional = false)
+    private Category category;
 
 
     public String getSubCategoryName() {
@@ -27,12 +27,11 @@ public class SubCategory extends ModelBase<SubCategoryDto> {
         this.subCategoryDescription = subCategoryDescription;
     }
 
-    @ManyToOne
-    public Category getCategoryByCategoryId() {
-        return categoryByCategoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryByCategoryId(Category categoryByCategoryId) {
-        this.categoryByCategoryId = categoryByCategoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

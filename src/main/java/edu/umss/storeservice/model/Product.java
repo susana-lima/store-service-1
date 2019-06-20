@@ -3,6 +3,7 @@ package edu.umss.storeservice.model;
 import edu.umss.storeservice.dto.ProductDto;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import java.sql.Timestamp;
 
 @Entity
@@ -24,6 +25,10 @@ public class Product extends ModelBase<ProductDto> {
     private Timestamp expirationDateProduct;
     private Timestamp startSaleDate;
     private Timestamp discontinuedDate;
+    @OneToOne(optional = false)
+    private SubCategory subCategory;
+    @OneToOne(optional = false)
+    private Unit unit;
 
     public String getShortNameProduct() {
         return shortNameProduct;
@@ -161,4 +166,19 @@ public class Product extends ModelBase<ProductDto> {
         this.discontinuedDate = discontinuedDate;
     }
 
+    public SubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(SubCategory subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
 }

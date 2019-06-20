@@ -7,25 +7,24 @@ import javax.persistence.*;
 @Entity
 public class ProductPhoto extends ModelBase<ProductPhotoDto> {
 
-    private Product productByProductId;
-    private Photo photoByPhotoId;
+    @ManyToOne(optional = false)
+    private Product product;
+    @ManyToOne(optional = false)
+    private Photo photo;
 
-
-    @ManyToOne
-    public Product getProductByProductId() {
-        return productByProductId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductByProductId(Product productByProductId) {
-        this.productByProductId = productByProductId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    @ManyToOne
-    public Photo getPhotoByPhotoId() {
-        return photoByPhotoId;
+    public Photo getPhoto() {
+        return photo;
     }
 
-    public void setPhotoByPhotoId(Photo photoByPhotoId) {
-        this.photoByPhotoId = photoByPhotoId;
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
     }
 }
