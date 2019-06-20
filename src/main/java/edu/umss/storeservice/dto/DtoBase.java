@@ -15,10 +15,9 @@ import java.util.stream.Collectors;
 public class DtoBase<E extends ModelBase> {
     private Long id;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-    private Date createdAt;
+    private Date createdOn;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-    private Date updatedAt;
-    private long version;
+    private Date updatedOn;
 
     protected void beforeConversion(E element, ModelMapper mapper) {
         // Do nothing
@@ -63,27 +62,19 @@ public class DtoBase<E extends ModelBase> {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getCreatedOn() {
+        return createdOn;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedOn(Date createdAt) {
+        this.createdOn = createdAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public Date getUpdatedOn() {
+        return updatedOn;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
+    public void setUpdatedOn(Date updatedAt) {
+        this.updatedOn = updatedAt;
     }
 }

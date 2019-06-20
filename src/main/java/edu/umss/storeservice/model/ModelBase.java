@@ -26,16 +26,12 @@ public class ModelBase<D extends DtoBase> {
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
-    private Date createdAt;
+    private Date createdOn;
 
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(insertable = false)
-    private Date updatedAt;
-
-    @Version
-    @Column(nullable = false)
-    private long version;
+    private Date updatedOn;
 
 
     public Long getId() {
@@ -46,28 +42,20 @@ public class ModelBase<D extends DtoBase> {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getCreatedOn() {
+        return createdOn;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedOn(Date createdAt) {
+        this.createdOn = createdAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public Date getUpdatedOn() {
+        return updatedOn;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
+    public void setUpdatedOn(Date updatedAt) {
+        this.updatedOn = updatedAt;
     }
 
     public ModelBase toDomain(D element, ModelMapper mapper) {
