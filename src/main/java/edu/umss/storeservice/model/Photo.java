@@ -3,20 +3,19 @@ package edu.umss.storeservice.model;
 import edu.umss.storeservice.dto.PhotoDto;
 
 import javax.persistence.Entity;
-import java.io.Serializable;
 
 @Entity
 public class Photo extends ModelBase<PhotoDto> {
-    private Serializable thumbnailPhoto;
+    private Byte[] thumbnailPhoto;
     private String thumbnailPhotoName;
-    private Serializable largePhoto;
+    private Byte[] largePhoto;
     private String largePhotoName;
 
-    public Serializable getThumbnailPhoto() {
+    public Byte[] getThumbnailPhoto() {
         return thumbnailPhoto;
     }
 
-    public void setThumbnailPhoto(Serializable thumbnailPhoto) {
+    public void setThumbnailPhoto(Byte[] thumbnailPhoto) {
         this.thumbnailPhoto = thumbnailPhoto;
     }
 
@@ -28,11 +27,11 @@ public class Photo extends ModelBase<PhotoDto> {
         this.thumbnailPhotoName = thumbnailPhotoName;
     }
 
-    public Serializable getLargePhoto() {
+    public Byte[] getLargePhoto() {
         return largePhoto;
     }
 
-    public void setLargePhoto(Serializable largePhoto) {
+    public void setLargePhoto(Byte[] largePhoto) {
         this.largePhoto = largePhoto;
     }
 

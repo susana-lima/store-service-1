@@ -1,0 +1,30 @@
+
+# MariaDB or Mysql Server config
+#spring:
+#  jpa:
+#    hibernate:
+#      ddl-auto: create-drop
+#      show-sql: true
+#      dialect: org.hibernate.dialect.MySQL5Dialect
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/ssidev
+#    username: root
+#    password: root
+
+
+
+# Coneccion de sql server
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;database=shippingforceprod
+    username: sa
+    password: sapassword
+    platform: mssql
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database: SQL_SERVER
+    show-sql: true
+
+#spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
