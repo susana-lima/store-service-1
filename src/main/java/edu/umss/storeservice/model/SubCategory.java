@@ -1,13 +1,16 @@
 package edu.umss.storeservice.model;
 
 import edu.umss.storeservice.dto.SubCategoryDto;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class SubCategory extends ModelBase<SubCategoryDto> {
     private String subCategoryName;
     private String subCategoryDescription;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Category category;
 
 
