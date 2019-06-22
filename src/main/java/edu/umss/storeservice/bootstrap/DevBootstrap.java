@@ -2,12 +2,16 @@ package edu.umss.storeservice.bootstrap;
 
 import edu.umss.storeservice.model.Unit;
 import edu.umss.storeservice.repository.UnitRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
+    @Autowired
     private UnitRepository unitRepository;
 
     public DevBootstrap(UnitRepository unitRepository) {
@@ -20,8 +24,8 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     private void initData() {
-        Unit unit = new Unit();
-        unit.setName("Metro");
-        unitRepository.save(unit);
+
+        List<Unit> testUnit = unitRepository.findAllUnit();
+        testUnit.size();
     }
 }

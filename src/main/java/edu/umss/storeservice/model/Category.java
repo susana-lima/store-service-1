@@ -3,10 +3,8 @@ package edu.umss.storeservice.model;
 import edu.umss.storeservice.dto.CategoryDto;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "category")
 public class Category extends ModelBase<CategoryDto> {
     private String categoryName;
     private String categoryDescription;
