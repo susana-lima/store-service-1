@@ -2,11 +2,34 @@ package edu.umss.storeservice.model;
 
 import edu.umss.storeservice.dto.ProductDto;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "product")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "sp_GetAll_Product",
+                procedureName = "sp_get_all_product",
+                resultClasses = Product.class
+        ),
+        @NamedStoredProcedureQuery(
+                name = "sp_Delete_Product_ById",
+                procedureName = "sp_delete_product_by_id",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "result", type = Boolean.class)
+                }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "sp_Get_Product_ById",
+                procedureName = "sp_get_product_by_id",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "id", type = Long.class)
+                },
+                resultClasses = Product.class
+        )
+})
 public class Product extends ModelBase<ProductDto> {
     private String shortNameProduct;
     private String nameProduct;

@@ -5,9 +5,11 @@
 package edu.umss.storeservice.bootstrap;
 
 import edu.umss.storeservice.model.Category;
+import edu.umss.storeservice.model.Product;
 import edu.umss.storeservice.model.SubCategory;
 import edu.umss.storeservice.model.Unit;
 import edu.umss.storeservice.repository.CategoryRepository;
+import edu.umss.storeservice.repository.ProductRepository;
 import edu.umss.storeservice.repository.SubCategoryRepository;
 import edu.umss.storeservice.repository.UnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +27,15 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private CategoryRepository categoryRepository;
     @Autowired
     private SubCategoryRepository subCategoryRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
-    public DevBootstrap(UnitRepository unitRepository, CategoryRepository categoryRepository, SubCategoryRepository subCategoryRepository) {
+    public DevBootstrap(UnitRepository unitRepository, CategoryRepository categoryRepository, SubCategoryRepository subCategoryRepository, ProductRepository productRepository) {
 
         this.unitRepository = unitRepository;
         this.categoryRepository = categoryRepository;
         this.subCategoryRepository = subCategoryRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -45,20 +50,20 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         Unit unitOne = unitRepository.findByIdTable(1L);
         unitOne.getName();
 
-        /*Boolean isDeleted = unitRepository.deleteByIdTable(2L);
+        Boolean isDeleted = unitRepository.deleteByIdTable(2L);
         if(isDeleted){
             System.out.println("Unit deleted");
-        }*/
+        }
 
         List<Category> categoryList = categoryRepository.findAllTable();
 
         Category categoryOne = categoryRepository.findByIdTable(1L);
         categoryOne.getCategoryDescription();
 
-        /*Boolean isDeletedCategory = categoryRepository.deleteByIdTable(2L);
+        Boolean isDeletedCategory = categoryRepository.deleteByIdTable(2L);
         if(isDeletedCategory){
             System.out.println("Category deleted");
-        }*/
+        }
 
         List<SubCategory> subCategoryList = subCategoryRepository.findAllTable();
 
@@ -70,6 +75,15 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
             System.out.println("Sub Category deleted");
         }
 
+        List<Product> productList = productRepository.findAllTable();
+
+        Product productOne = productRepository.findByIdTable(1L);
+        productOne.getCodeProduct();
+
+        Boolean isDeletedProduct = productRepository.deleteByIdTable(2L);
+        if(isDeletedProduct){
+            System.out.println("Product deleted");
+        }
 
     }
 }
