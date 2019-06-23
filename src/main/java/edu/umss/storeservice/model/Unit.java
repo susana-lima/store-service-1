@@ -3,7 +3,6 @@ package edu.umss.storeservice.model;
 import edu.umss.storeservice.dto.UnitDto;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "unit")
@@ -29,7 +28,7 @@ import java.io.Serializable;
                 }
         ),
         @NamedStoredProcedureQuery(
-                name = "sp_get_unit_by_id",
+                name = "sp_Get_Unit_ById",
                 procedureName = "sp_get_unit_by_id",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "id", type = Long.class)
@@ -37,7 +36,7 @@ import java.io.Serializable;
                 resultClasses = Unit.class
         )
 })
-public class Unit extends ModelBase<UnitDto> implements Serializable {
+public class Unit extends ModelBase<UnitDto> {
     private String name;
 
     public String getName() {

@@ -25,7 +25,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     private void initData() {
 
-        List<Unit> testUnit = unitRepository.findAllUnit();
+        List<Unit> testUnit = unitRepository.findAllTable();
         testUnit.size();
     }
 }
