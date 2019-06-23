@@ -50,7 +50,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         Unit unitOne = unitRepository.findByIdTable(1L);
         unitOne.getName();
 
-        Boolean isDeleted = unitRepository.deleteByIdTable(2L);
+        Boolean isDeleted = unitRepository.deleteByIdTable(3L);
         if(isDeleted){
             System.out.println("Unit deleted");
         }
@@ -60,7 +60,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         Category categoryOne = categoryRepository.findByIdTable(1L);
         categoryOne.getCategoryDescription();
 
-        Boolean isDeletedCategory = categoryRepository.deleteByIdTable(2L);
+        Boolean isDeletedCategory = categoryRepository.deleteByIdTable(3L);
         if(isDeletedCategory){
             System.out.println("Category deleted");
         }
@@ -70,7 +70,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         SubCategory subCategoryOne = subCategoryRepository.findByIdTable(1L);
         subCategoryOne.getSubCategoryName();
 
-        Boolean isDeletedSubCategory = subCategoryRepository.deleteByIdTable(2L);
+        Boolean isDeletedSubCategory = subCategoryRepository.deleteByIdTable(3L);
         if(isDeletedSubCategory){
             System.out.println("Sub Category deleted");
         }
@@ -80,7 +80,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         Product productOne = productRepository.findByIdTable(1L);
         productOne.getCodeProduct();
 
-        Boolean isDeletedProduct = productRepository.deleteByIdTable(2L);
+        Boolean isDeletedProduct = productRepository.deleteByIdTable(3L);
         if(isDeletedProduct){
             System.out.println("Product deleted");
         }
