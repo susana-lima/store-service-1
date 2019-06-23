@@ -5,8 +5,10 @@
 package edu.umss.storeservice.bootstrap;
 
 import edu.umss.storeservice.model.Category;
+import edu.umss.storeservice.model.SubCategory;
 import edu.umss.storeservice.model.Unit;
 import edu.umss.storeservice.repository.CategoryRepository;
+import edu.umss.storeservice.repository.SubCategoryRepository;
 import edu.umss.storeservice.repository.UnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -21,11 +23,14 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private UnitRepository unitRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private SubCategoryRepository subCategoryRepository;
 
-    public DevBootstrap(UnitRepository unitRepository, CategoryRepository categoryRepository) {
+    public DevBootstrap(UnitRepository unitRepository, CategoryRepository categoryRepository, SubCategoryRepository subCategoryRepository) {
 
         this.unitRepository = unitRepository;
         this.categoryRepository = categoryRepository;
+        this.subCategoryRepository = subCategoryRepository;
     }
 
     @Override
@@ -50,9 +55,21 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         Category categoryOne = categoryRepository.findByIdTable(1L);
         categoryOne.getCategoryDescription();
 
-        Boolean isDeletedCategory = categoryRepository.deleteByIdTable(2L);
+        /*Boolean isDeletedCategory = categoryRepository.deleteByIdTable(2L);
         if(isDeletedCategory){
             System.out.println("Category deleted");
+        }*/
+
+        List<SubCategory> subCategoryList = subCategoryRepository.findAllTable();
+
+        SubCategory subCategoryOne = subCategoryRepository.findByIdTable(1L);
+        subCategoryOne.getSubCategoryName();
+
+        Boolean isDeletedSubCategory = subCategoryRepository.deleteByIdTable(2L);
+        if(isDeletedSubCategory){
+            System.out.println("Sub Category deleted");
         }
+
+
     }
 }
