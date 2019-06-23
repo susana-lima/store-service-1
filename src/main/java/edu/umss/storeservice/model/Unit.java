@@ -20,10 +20,10 @@ import javax.persistence.*;
                 }
         ),
         @NamedStoredProcedureQuery(
-                name = "sp_delete_unit_by_id",
+                name = "sp_Delete_Unit_ById",
                 procedureName = "sp_delete_unit_by_id",
                 parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "unit_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "result", type = Boolean.class)
                 }
         ),

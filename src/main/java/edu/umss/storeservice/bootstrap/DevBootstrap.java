@@ -1,3 +1,7 @@
+/**
+ * @author: Susana Lima
+ */
+
 package edu.umss.storeservice.bootstrap;
 
 import edu.umss.storeservice.model.Unit;
@@ -27,5 +31,13 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
         List<Unit> testUnit = unitRepository.findAllTable();
         testUnit.size();
+
+        Unit unitOne = unitRepository.findByIdTable(1L);
+        unitOne.getName();
+
+        Boolean isDeleted = unitRepository.deleteByIdTable(2L);
+        if(isDeleted){
+            System.out.println("Unit deleted");
+        }
     }
 }

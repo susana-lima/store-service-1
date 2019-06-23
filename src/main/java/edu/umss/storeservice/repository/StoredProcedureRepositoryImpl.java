@@ -1,3 +1,7 @@
+/**
+ * @author: Susana Lima
+ */
+
 package edu.umss.storeservice.repository;
 
 import edu.umss.storeservice.model.ModelBase;
@@ -26,5 +30,35 @@ public abstract class StoredProcedureRepositoryImpl<T extends ModelBase> impleme
         query.execute();
 
         return (List<T>) query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public T findByIdTable(Long id){
+        String typeName = (((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0])
+                .getTypeName();
+        typeName = typeName.substring(typeName.lastIndexOf('.') + 1);
+
+        StoredProcedureQuery  query = entityManager.createNamedStoredProcedureQuery("sp_Get_"+typeName+"_ById");
+        query.setParameter("id", id);
+
+        query.execute();
+
+        return (T) query.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public Boolean deleteByIdTable(Long id){
+        String typeName = (((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0])
+                .getTypeName();
+        typeName = typeName.substring(typeName.lastIndexOf('.') + 1);
+
+        StoredProcedureQuery  query = entityManager.createNamedStoredProcedureQuery("sp_Delete_"+typeName+"_ById");
+        query.setParameter("id", id);
+
+        query.execute();
+
+        return (Boolean) query.getOutputParameterValue("result");
     }
 }
