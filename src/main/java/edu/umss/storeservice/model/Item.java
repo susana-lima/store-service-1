@@ -21,6 +21,7 @@ public class Item extends ModelBase<ItemDto> {
     //todo crear modelo unidad
     private String capacityUnit;
     private Integer capacityValue;
+    private String description;
     // todo crear una entidad inventory con item y quantity
 
     @OneToMany
@@ -103,5 +104,13 @@ public class Item extends ModelBase<ItemDto> {
 
     public void setCapacityValue(Integer capacityValue) {
         this.capacityValue = capacityValue;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

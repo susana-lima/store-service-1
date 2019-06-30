@@ -63,6 +63,13 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         tractorSubCategory.setName("TRACTOR");
         subCategoryService.save(tractorSubCategory);
 
+        // MOTOCULTOR subcategory
+        SubCategory motocultorSubCategory = new SubCategory();
+        motocultorSubCategory.setCategory(maquinariaCategory);
+        motocultorSubCategory.setCode("MOT");
+        motocultorSubCategory.setName("MOTOCULTOR");
+        subCategoryService.save(motocultorSubCategory);
+
         // Taller category
         Category tallerCategory = new Category();
         tallerCategory.setCode("TAL");
@@ -77,19 +84,25 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         montacargaSubCategory.setName("MONTACARGA");
         subCategoryService.save(montacargaSubCategory);
 
+        // tractorKubota10 Item
+        saveItem(tractorSubCategory, "TRACTOR-K-10", "Tractor Kubota 10.5 Hp",
+                "Tractor útil para arado en superficies regulares sin pendientes pronunciadas. Modelo JB11XA, Con " +
+                        "Rotocultor, Diesel, 4x4, 10,5 HP. Año 2015");
+
         // tractorKubota20 Item
-        Item tractorKubota20 = new Item();
-        tractorKubota20.setCode("TRACTOR-K-20");
-        tractorKubota20.setName("TRACTOR Kubota 20 HP");
-        tractorKubota20.setSubCategory(tractorSubCategory);
-        itemService.save(tractorKubota20);
+        saveItem(tractorSubCategory, "TRACTOR-K-20", "Tractor kubota con pala 20Hp",
+                "Tractor útil para arado en superficies con pendientes pronunciadas, para situaciones de alto " +
+                        "esfuerzo. Modelo L1-20DT, Con Rotocultor, Diesel 4x4, 20 HP, Con Pala.");
 
         // montacargaMitsubishi2T Item
-        Item montacargaMitsubishi2T = new Item();
-        montacargaMitsubishi2T.setCode("MON-M-2T");
-        montacargaMitsubishi2T.setName("MONTACARGA MITSUBISHI 2T");
-        montacargaMitsubishi2T.setSubCategory(montacargaSubCategory);
-        itemService.save(montacargaMitsubishi2T);
+        saveItem(motocultorSubCategory, "MOT-M-3", "Motocultor yanmar 250",
+                "Motocultor útil para arado en superficies de dificil acceso, con espacios reducidos, para " +
+                        "situaciones de alto esfuerzo. Arado De Mano Modelo YC80, Diesel.");
+
+        // montacargaMitsubishi2T Item
+        saveItem(montacargaSubCategory, "MON-M-2T", "Montacarga",
+                "Hechos pensados en la industria donde la exigencia del equipo es frecuente. Komatsu BOBLE, ALTURA " +
+                        "ELEVANTE 3,0 MTS");
 
         // Employee Employee
         Employee john = new Employee();
@@ -112,6 +125,15 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         john.getContracts().add(contract);
         employeeService.save(john);
         //contractService.save(contract);
+    }
+
+    private void saveItem(SubCategory tractorSubCategory, String code, String name, String description) {
+        Item item = new Item();
+        item.setCode(code);
+        item.setName(name);
+        item.setDescription(description);
+        item.setSubCategory(tractorSubCategory);
+        itemService.save(item);
     }
 
 }
