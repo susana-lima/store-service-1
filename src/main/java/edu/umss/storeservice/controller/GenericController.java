@@ -21,6 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
+@CrossOrigin
 public abstract class GenericController<E extends ModelBase, D extends DtoBase<E>> {
 
     protected static final String ID = "id";
@@ -163,6 +165,15 @@ public abstract class GenericController<E extends ModelBase, D extends DtoBase<E
 
     protected Sort getSortType(boolean isAsc, String... filter) {
         return isAsc ? Sort.by(filter).ascending() : Sort.by(filter).descending();
+    }
+
+    public ResponseEntity uploadImage(@RequestParam("file") MultipartFile[] uploadingFiles,
+            @PathVariable("id") Long id) throws IOException {
+        for (MultipartFile uploadedFile : uploadingFiles) {
+            uploadedFile.getOriginalFilename();
+            getService().saveImage(id, uploadedFile.getInputStream());
+        }
+        return ResponseEntity.ok("Image uploaded successfully");
     }
 
 

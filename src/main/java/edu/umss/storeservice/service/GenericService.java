@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.List;
 
 @SuppressWarnings("rawtypes")
@@ -34,4 +35,5 @@ public interface GenericService<T extends ModelBase> {
 
     List<T> findAll(String filter);
 
+    void saveImage(Long id, InputStream file);
 }

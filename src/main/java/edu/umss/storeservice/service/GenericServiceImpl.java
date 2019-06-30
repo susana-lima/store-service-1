@@ -8,6 +8,7 @@ import edu.umss.storeservice.dto.DtoBase;
 import edu.umss.storeservice.model.ModelBase;
 import edu.umss.storeservice.repository.GenericRepository;
 import edu.umss.storeservice.repository.specifications.GenericSpecificationsBuilder;
+import edu.umss.storeservice.utils.ImageUtils;
 import edu.umss.storeservice.utils.StringUtility;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.NoResultException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.ParameterizedType;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -144,5 +146,21 @@ public abstract class GenericServiceImpl<T extends ModelBase> implements Generic
         return new Byte[0];
     }
 
+    @Override
+    public void saveImage(Long id, InputStream file) {
+        T model = findById(id);
+        try {
+            Byte[] bytes = ImageUtils.inputStreamToByteArray(file);
+            setImage(model, bytes);
+            getRepository().save(model);
+        } catch (IOException e) {
+            logger.error("Error reading file", e);
+        }
+    }
+
     protected abstract GenericRepository<T> getRepository();
+
+    // set the bytes in the appropriate property in the model object
+    protected void setImage(T model, Byte[] bytes) {
+    }
 }

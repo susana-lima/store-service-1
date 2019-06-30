@@ -21,4 +21,9 @@ public class ItemServiceImpl extends GenericServiceImpl<Item> implements ItemSer
     protected GenericRepository<Item> getRepository() {
         return repository;
     }
+
+    @Override
+    public void setImage(Item itemPersisted, Byte[] bytes) {
+        itemPersisted.setImage(bytes);
+    }
 }
