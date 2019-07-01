@@ -1,13 +1,14 @@
 /**
- * (C) 2017 Agilysys NV, LLC.  All Rights Reserved.  Confidential Information of Agilysys NV, LLC.
+ * @author: Edson A. Terceros T.
+ * 18
  */
+
 package edu.umss.storeservice.dto;
 
-import edu.umss.storeservice.model.Item;
-import org.apache.tomcat.util.codec.binary.Base64;
+import edu.umss.storeservice.model.ItemInstance;
 import org.modelmapper.ModelMapper;
 
-public class ItemDto extends DtoBase<Item> {
+public class ItemInstanceDto extends DtoBase<ItemInstance> {
 
     private String name;
     private String code;
@@ -20,6 +21,8 @@ public class ItemDto extends DtoBase<Item> {
     private Long id;
     private String description;
     private Boolean featured;
+    private String identifier;
+    private ItemDto itemDto;
 
     public String getName() {
         return name;
@@ -27,6 +30,22 @@ public class ItemDto extends DtoBase<Item> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public String getImage() {
@@ -45,6 +64,14 @@ public class ItemDto extends DtoBase<Item> {
         this.category = category;
     }
 
+    public Long getSubCategoryId() {
+        return subCategoryId;
+    }
+
+    public void setSubCategoryId(Long subCategoryId) {
+        this.subCategoryId = subCategoryId;
+    }
+
     public String getPrice() {
         return price;
     }
@@ -61,10 +88,12 @@ public class ItemDto extends DtoBase<Item> {
         this.comments = comments;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -85,45 +114,29 @@ public class ItemDto extends DtoBase<Item> {
         this.featured = featured;
     }
 
-    public String getLabel() {
-        return label;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
-    public Long getSubCategoryId() {
-        return subCategoryId;
+    public ItemDto getItemDto() {
+        return itemDto;
     }
 
-    public void setSubCategoryId(Long subCategoryId) {
-        this.subCategoryId = subCategoryId;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
+    public void setItemDto(ItemDto itemDto) {
+        this.itemDto = itemDto;
     }
 
     @Override
-    public ItemDto toDto(Item item, ModelMapper mapper) {
-        super.toDto(item, mapper);
-        setCategory(item.getSubCategory().getCategory().getName());
-        setLabel(item.getName());
-        if (item.getImage() != null) {
-            byte[] bytes = new byte[item.getImage().length];
-            for (int i = 0; i < item.getImage().length; i++) {
-                bytes[i] = item.getImage()[i];
-            }
-            String imageStr = Base64.encodeBase64String(bytes);
-            setImage(imageStr);
-        }
-        setPrice("5");
+    public DtoBase toDto(ItemInstance itemInstance, ModelMapper mapper) {
+        super.toDto(itemInstance, mapper);
+        mapper.map(itemInstance.getItem(), this);
+        // copy item to itemdto
+        setItemDto(new ItemDto().toDto(itemInstance.getItem(), mapper));
+        setImage(getItemDto().getImage());
         return this;
     }
-
 }

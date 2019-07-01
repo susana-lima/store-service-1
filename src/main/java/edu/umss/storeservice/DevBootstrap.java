@@ -85,24 +85,28 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         subCategoryService.save(montacargaSubCategory);
 
         // tractorKubota10 Item
-        saveItem(tractorSubCategory, "TRACTOR-K-10", "Tractor Kubota 10.5 Hp",
+        Item tractorKubota10 = saveItem(tractorSubCategory, "TRACTOR-K-10", "Tractor Kubota 10.5 Hp",
                 "Tractor útil para arado en superficies regulares sin pendientes pronunciadas. Modelo JB11XA, Con " +
                         "Rotocultor, Diesel, 4x4, 10,5 HP. Año 2015");
+        saveItemInstance(tractorKubota10, true);
 
         // tractorKubota20 Item
-        saveItem(tractorSubCategory, "TRACTOR-K-20", "Tractor kubota con pala 20Hp",
+        Item tractorKubota20 = saveItem(tractorSubCategory, "TRACTOR-K-20", "Tractor kubota con pala 20Hp",
                 "Tractor útil para arado en superficies con pendientes pronunciadas, para situaciones de alto " +
                         "esfuerzo. Modelo L1-20DT, Con Rotocultor, Diesel 4x4, 20 HP, Con Pala.");
+        saveItemInstance(tractorKubota20, false);
 
-        // montacargaMitsubishi2T Item
-        saveItem(motocultorSubCategory, "MOT-M-3", "Motocultor yanmar 250",
+        // motocultor Item
+        Item motocultor = saveItem(motocultorSubCategory, "MOT-M-3", "Motocultor yanmar 250",
                 "Motocultor útil para arado en superficies de dificil acceso, con espacios reducidos, para " +
                         "situaciones de alto esfuerzo. Arado De Mano Modelo YC80, Diesel.");
+        saveItemInstance(motocultor, false);
 
         // montacargaMitsubishi2T Item
-        saveItem(montacargaSubCategory, "MON-M-2T", "Montacarga",
+        Item montacargaMitsubishi2T = saveItem(montacargaSubCategory, "MON-M-2T", "Montacarga",
                 "Hechos pensados en la industria donde la exigencia del equipo es frecuente. Komatsu BOBLE, ALTURA " +
                         "ELEVANTE 3,0 MTS");
+        saveItemInstance(montacargaMitsubishi2T, false);
 
         // Employee Employee
         Employee john = new Employee();
@@ -127,13 +131,20 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         //contractService.save(contract);
     }
 
-    private void saveItem(SubCategory tractorSubCategory, String code, String name, String description) {
+    private void saveItemInstance(Item tractorKubota10, boolean featured) {
+        ItemInstance itemInstance = new ItemInstance();
+        itemInstance.setFeatured(featured);
+        itemInstance.setItem(tractorKubota10);
+        itemInstanceService.save(itemInstance);
+    }
+
+    private Item saveItem(SubCategory tractorSubCategory, String code, String name, String description) {
         Item item = new Item();
         item.setCode(code);
         item.setName(name);
         item.setDescription(description);
         item.setSubCategory(tractorSubCategory);
-        itemService.save(item);
+        return itemService.save(item);
     }
 
 }

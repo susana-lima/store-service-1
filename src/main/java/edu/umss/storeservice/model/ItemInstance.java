@@ -4,13 +4,14 @@
 
 package edu.umss.storeservice.model;
 
-import edu.umss.storeservice.dto.ItemDto;
+import edu.umss.storeservice.dto.ItemInstanceDto;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
-public class ItemInstance extends ModelBase<ItemDto> {
+public class ItemInstance extends ModelBase<ItemInstanceDto> {
     @OneToOne
     private Item item;
     private String identifier;
@@ -53,5 +54,12 @@ public class ItemInstance extends ModelBase<ItemDto> {
 
     public void setFeatured(Boolean featured) {
         this.featured = featured;
+    }
+
+    @Override
+    public ModelBase toDomain(ItemInstanceDto element, ModelMapper mapper) {
+        super.toDomain(element, mapper);
+        setItem((Item) new Item().toDomain(element.getItemDto(), mapper));
+        return this;
     }
 }
