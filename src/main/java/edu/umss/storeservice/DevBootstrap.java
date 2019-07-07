@@ -132,10 +132,12 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     private void saveItemInstance(Item tractorKubota10, boolean featured) {
-        ItemInstance itemInstance = new ItemInstance();
-        itemInstance.setFeatured(featured);
-        itemInstance.setItem(tractorKubota10);
-        itemInstanceService.save(itemInstance);
+        if(!itemInstanceService.existFeaturedItem()){
+            ItemInstance itemInstance = new ItemInstance();
+            itemInstance.setFeatured(featured);
+            itemInstance.setItem(tractorKubota10);
+            itemInstanceService.save(itemInstance);
+        }
     }
 
     private Item saveItem(SubCategory tractorSubCategory, String code, String name, String description) {

@@ -65,7 +65,7 @@ public abstract class GenericController<E extends ModelBase, D extends DtoBase<E
     }
 
     @GetMapping
-    protected List<D> getAll() {
+    protected List<D> getAll(@RequestParam Boolean... featured) {
         return toDto(getService().findAll());
     }
 
